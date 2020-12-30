@@ -987,6 +987,7 @@ MonoBehaviour:
   AwareRadius: 10
   AttackRadius: 5
   TimeToStopAttack: 2
+  Projectile: {fileID: 6557515879117769590, guid: d5a525f55a5ea064a8aeceae7ee4807a, type: 3}
 --- !u!195 &1147576966
 NavMeshAgent:
   m_ObjectHideFlags: 0

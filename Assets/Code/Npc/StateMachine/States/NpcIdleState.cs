@@ -59,7 +59,7 @@ namespace Assets.Code.Npc.StateMachine.States
 
             if (_nearestEnemy != null)
             {
-                Owner.StateMachine.ChangeState(new NpcAttackState(Owner));
+                Owner.StateMachine.ChangeState(new NpcAttackState(Owner, _nearestEnemy));
             }
         }
     }

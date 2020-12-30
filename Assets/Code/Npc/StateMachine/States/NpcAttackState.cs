@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Assets.Code.Attacks;
+using Assets.Code.Damage;
 using Assets.Code.Npc.Minions;
 using UnityEngine;
-using UnityEngine.AI;
 
 namespace Assets.Code.Npc.StateMachine.States
 {
@@ -13,15 +9,17 @@ namespace Assets.Code.Npc.StateMachine.States
     {
         private float _lastAttackTime = 0;
 
-        public NpcAttackState(MinionBase owner): base(owner)
+        public NpcAttackState(MinionBase owner, Transform attackTarget): base(owner)
         {
-           
+            owner.AttackTarget = attackTarget;
         }
 
         public void Enter()
         {
             Debug.Log($"Starter Attack state");
             _lastAttackTime = Time.time;
+
+            Owner.Shoot();
         }
 
         public void Execute()
