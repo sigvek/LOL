@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Assets.Code.Damage;
 using Assets.Code.Npc.StateMachine;
 using Assets.Code.Npc.StateMachine.States;
-using UnityEngine;
-using UnityEngine.AI;
 
 namespace Assets.Code.Npc.Minions
 {
@@ -14,7 +8,7 @@ namespace Assets.Code.Npc.Minions
     {
         void Start()
         {
-            
+            DamageData = new DamageData() {BaseDamage = 100f, ProjectileSpeed = 30f};
 
             StateMachine = new NpcStateMachine(new NpcIdleState(this));
         }

@@ -18,20 +18,16 @@ namespace Assets.Code.Npc.Minions
         public float TimeToStopAttack = 2f;
         public NpcAutoAttackProjectile Projectile;
         public Transform AttackTarget;
+        public DamageData DamageData;
 
         public NpcStateMachine StateMachine;
 
         public void Shoot()
         {
             var projectile = Projectile;
-            //projectile.DamageData = new DamageData
-            //{
-            //    BaseDamage = 100f,
-            //    ProjectileSpeed = 10f
-
-            //};
-            projectile.TargeTransform = AttackTarget;
-            var clone = Instantiate<NpcAutoAttackProjectile>(projectile, transform);
+            projectile.Owner = this;
+            projectile.AttackTarget = AttackTarget;
+            var clone = Instantiate(projectile, transform);
         }
     }
 }
