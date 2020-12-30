@@ -9,6 +9,7 @@ namespace Assets.Code
     public class MyPlayer : MonoBehaviour, IDamagable
     {
         public float Speed = 20f;
+        public float Health = 1000f;
 
         private bool _inputA, _inputD, _inputW, _inputS;
         private NavMeshAgent _agent;
