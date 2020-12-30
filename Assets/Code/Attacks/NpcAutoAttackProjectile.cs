@@ -26,8 +26,26 @@ namespace Assets.Code.Attacks
             if(!AttackTarget)
                 return;
 
-            _direction = (AttackTarget.position - transform.position).normalized;
-            transform.position += _direction * Owner.DamageData.ProjectileSpeed * Time.deltaTime;
+            Move();
+            DealDamage();
+        }
+
+        private void Move()
+        {
+            _direction = (AttackTarget.position - transform.position);
+            transform.position += _direction.normalized * Owner.DamageData.ProjectileSpeed * Time.deltaTime;
+        }
+
+        private void DealDamage()
+        {
+            if (_direction.magnitude <= .5f)
+            {
+                Debug.Log($"Magnitude: {_direction.magnitude}");
+                // Gi skade
+                AttackTarget.GetComponentInParent<IDamagable>().TakeDamage(Owner.DamageData);
+
+                Destroy(gameObject);
+            }
         }
     }
 }

@@ -1,11 +1,12 @@
 ﻿using System.Runtime.CompilerServices;
+using Assets.Code.Damage;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UIElements;
 
 namespace Assets.Code
 {
-    public class MyPlayer : MonoBehaviour
+    public class MyPlayer : MonoBehaviour, IDamagable
     {
         public float Speed = 20f;
 
@@ -63,6 +64,11 @@ namespace Assets.Code
             {
                 transform.Translate(Vector3.back * Time.deltaTime * Speed);
             }
+        }
+
+        public void TakeDamage(DamageData damageData)
+        {
+            Debug.Log($"Player takes {damageData.BaseDamage} damage!");
         }
     }
 }
