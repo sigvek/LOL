@@ -18,7 +18,6 @@ namespace Assets.Code.Attacks
 
         void Start()
         {
-            Debug.Log($"TargetTransform: {AttackTarget.position}");
         }
 
         void Update()
@@ -40,8 +39,6 @@ namespace Assets.Code.Attacks
         {
             if (_direction.magnitude <= .5f)
             {
-                Debug.Log($"Magnitude: {_direction.magnitude}");
-                // Gi skade
                 AttackTarget.GetComponentInParent<IDamagable>().TakeDamage(Owner.DamageData);
 
                 Destroy(gameObject);

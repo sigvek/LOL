@@ -1,23 +1,28 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System;
+using System.Runtime.CompilerServices;
 using Assets.Code.Damage;
+using Assets.Code.UI;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.UIElements;
 
 namespace Assets.Code
 {
     public class MyPlayer : MonoBehaviour, IDamagable
     {
         public float Speed = 20f;
-        public float Health = 1000f;
+        public float MaxHealth = 1000f;
+        public float CurrentHealth = 1000f;
 
         private bool _inputA, _inputD, _inputW, _inputS;
         private NavMeshAgent _agent;
+        private FloatingInfo _floatingInfo;
 
         void Start()
         {
             _agent = GetComponent<NavMeshAgent>();
             _agent.speed = Speed;
+            _floatingInfo = GetComponentInChildren<FloatingInfo>();
+            _floatingInfo.SetHealthBar(1f);
         }
 
         void Update()
@@ -69,7 +74,10 @@ namespace Assets.Code
 
         public void TakeDamage(DamageData damageData)
         {
-            Debug.Log($"Player takes {damageData.BaseDamage} damage!");
+            CurrentHealth -= damageData.BaseDamage;
+            _floatingInfo.SetHealthBar(CurrentHealth / MaxHealth);
+
+            Debug.Log($"Player takes {damageData.BaseDamage} damage! Now {CurrentHealth} hp");
         }
     }
 }

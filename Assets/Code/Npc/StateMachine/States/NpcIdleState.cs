@@ -22,13 +22,11 @@ namespace Assets.Code.Npc.StateMachine.States
 
         public void Enter()
         {
-            Debug.Log($"Starter Idle state");
             _agent = Owner.GetComponent<NavMeshAgent>();
             _agent.destination = Owner.MoveTarget.position;
             _agent.isStopped = false;
 
             _enemyLayer = LayerMask.NameToLayer("SouthTeam");
-            Debug.Log(_enemyLayer);
         }
 
         public void Execute()
@@ -38,7 +36,6 @@ namespace Assets.Code.Npc.StateMachine.States
 
         public void Exit()
         {
-            Debug.Log($"Slutter Idle state");
             _agent.isStopped = true;
         }
 

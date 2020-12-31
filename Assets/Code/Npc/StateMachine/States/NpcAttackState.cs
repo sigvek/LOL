@@ -16,7 +16,6 @@ namespace Assets.Code.Npc.StateMachine.States
 
         public void Enter()
         {
-            Debug.Log($"Starter Attack state");
             _lastAttackTime = Time.time;
 
             Owner.Shoot();
@@ -29,7 +28,6 @@ namespace Assets.Code.Npc.StateMachine.States
 
         public void Exit()
         {
-            Debug.Log($"Slutter Attack state");
         }
 
         private void ShouldStopAttacking()
