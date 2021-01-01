@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace Assets.Code.Npc.StateMachine
 {
-    public class NpcStateMachine
+    public class StateMachine<T> where T : IState
     {
-        private INpcState _state;
+        private IState _state;
 
-        public NpcStateMachine(INpcState state)
+        public StateMachine(IState state)
         {
             ChangeState(state);
         }
 
-        public void ChangeState(INpcState newState)
+        public void ChangeState(IState newState)
         {
             _state?.Exit();
             _state = newState;

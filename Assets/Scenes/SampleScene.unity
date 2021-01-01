@@ -358,8 +358,8 @@ GameObject:
   - component: {fileID: 597234745}
   - component: {fileID: 597234744}
   - component: {fileID: 597234743}
-  - component: {fileID: 597234746}
   - component: {fileID: 597234747}
+  - component: {fileID: 597234742}
   m_Layer: 6
   m_Name: Player01
   m_TagString: Untagged
@@ -382,6 +382,23 @@ Transform:
   m_Father: {fileID: 1221242498}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &597234742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 597234740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 252db186ae73a734ca8eaca171bfdb2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Projectile: {fileID: 5021684979035423394, guid: ae941f3804fea564993bbcfe2f9ca0e9, type: 3}
+  AttackTarget: {fileID: 0}
+  Speed: 20
+  MaxHealth: 1000
+  CurrentHealth: 1000
 --- !u!136 &597234743
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -445,21 +462,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 597234740}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &597234746
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 597234740}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 252db186ae73a734ca8eaca171bfdb2b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Speed: 20
-  MaxHealth: 1000
-  CurrentHealth: 1000
 --- !u!195 &597234747
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1001,6 +1003,9 @@ MonoBehaviour:
   TimeToStopAttack: 2
   Projectile: {fileID: 6557515879117769590, guid: d5a525f55a5ea064a8aeceae7ee4807a, type: 3}
   AttackTarget: {fileID: 0}
+  Speed: 20
+  MaxHealth: 1000
+  CurrentHealth: 1000
 --- !u!195 &1147576966
 NavMeshAgent:
   m_ObjectHideFlags: 0

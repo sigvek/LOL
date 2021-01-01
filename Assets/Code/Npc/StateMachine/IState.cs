@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Assets.Code.Npc.StateMachine
 {
-    public interface INpcState
+    public interface IState
     {
         void Enter();
         void Execute();

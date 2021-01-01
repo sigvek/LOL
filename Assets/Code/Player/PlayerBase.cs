@@ -1,24 +1,36 @@
 ﻿using System;
-using System.Runtime.CompilerServices;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Assets.Code.Attacks;
 using Assets.Code.Damage;
+using Assets.Code.Npc.StateMachine;
+using Assets.Code.Npc.StateMachine.States;
 using Assets.Code.UI;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace Assets.Code
+namespace Assets.Code.Player
 {
-    public class MyPlayer : MonoBehaviour, IDamagable
+    public class PlayerBase : MonoBehaviour, IDamagable
     {
+        private NavMeshAgent _agent;
+        private FloatingInfo _floatingInfo;
+        private bool _inputA, _inputD, _inputW, _inputS;
+
+        public DamageData DamageData;
+        public PlayerAutoAttackProjectile Projectile;
+        public Transform AttackTarget;
         public float Speed = 20f;
         public float MaxHealth = 1000f;
         public float CurrentHealth = 1000f;
-
-        private bool _inputA, _inputD, _inputW, _inputS;
-        private NavMeshAgent _agent;
-        private FloatingInfo _floatingInfo;
+        public StateMachine<PlayerStateBase> StateMachine;
 
         void Start()
         {
+            DamageData = new DamageData() { BaseDamage = 200f, ProjectileSpeed = 30f };
+
             _agent = GetComponent<NavMeshAgent>();
             _agent.speed = Speed;
             _floatingInfo = GetComponentInChildren<FloatingInfo>();
@@ -70,6 +82,14 @@ namespace Assets.Code
             {
                 transform.Translate(Vector3.back * Time.deltaTime * Speed);
             }
+        }
+
+        public void Shoot()
+        {
+            var projectile = Projectile;
+            projectile.Owner = this;
+            projectile.AttackTarget = AttackTarget;
+            var clone = Instantiate(projectile, transform);
         }
 
         public void TakeDamage(DamageData damageData)

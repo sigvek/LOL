@@ -1,11 +1,9 @@
-﻿using Assets.Code.Attacks;
-using Assets.Code.Damage;
-using Assets.Code.Npc.Minions;
+﻿using Assets.Code.Npc.Minions;
 using UnityEngine;
 
-namespace Assets.Code.Npc.StateMachine.States
+namespace Assets.Code.Npc.StateMachine.States.NpcStates
 {
-    public class NpcAttackState : NpcStateBase, INpcState
+    public class NpcAttackState : NpcStateBase
     {
         private float _lastAttackTime = 0;
 
@@ -14,19 +12,19 @@ namespace Assets.Code.Npc.StateMachine.States
             owner.AttackTarget = attackTarget;
         }
 
-        public void Enter()
+        public override void Enter()
         {
             _lastAttackTime = Time.time;
 
             Owner.Shoot();
         }
 
-        public void Execute()
+        public override void Execute()
         {
             ShouldStopAttacking();
         }
 
-        public void Exit()
+        public override void Exit()
         {
         }
 

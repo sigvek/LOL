@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Assets.Code.Npc.Minions;
+﻿using Assets.Code.Npc.Minions;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace Assets.Code.Npc.StateMachine.States
+namespace Assets.Code.Npc.StateMachine.States.NpcStates
 {
-    public class NpcIdleState : NpcStateBase, INpcState
+    public class NpcIdleState : NpcStateBase
     {
         private NavMeshAgent _agent;
         private int _enemyLayer;
@@ -20,7 +15,7 @@ namespace Assets.Code.Npc.StateMachine.States
            
         }
 
-        public void Enter()
+        public override void Enter()
         {
             _agent = Owner.GetComponent<NavMeshAgent>();
             _agent.destination = Owner.MoveTarget.position;
@@ -29,12 +24,12 @@ namespace Assets.Code.Npc.StateMachine.States
             _enemyLayer = LayerMask.NameToLayer("SouthTeam");
         }
 
-        public void Execute()
+        public override void Execute()
         {
             FindEnemies();
         }
 
-        public void Exit()
+        public override void Exit()
         {
             _agent.isStopped = true;
         }
