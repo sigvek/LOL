@@ -10,12 +10,12 @@ namespace Assets.Code.Npc.StateMachine
     {
         private IState _state;
 
-        public StateMachine(IState state)
+        public StateMachine(T state)
         {
             ChangeState(state);
         }
 
-        public void ChangeState(IState newState)
+        public void ChangeState(T newState)
         {
             _state?.Exit();
             _state = newState;

@@ -5,8 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Assets.Code.Attacks;
 using Assets.Code.Damage;
+using Assets.Code.Npc.Minions;
 using Assets.Code.Npc.StateMachine;
 using Assets.Code.Npc.StateMachine.States;
+using Assets.Code.Npc.StateMachine.States.PlayerStates;
 using Assets.Code.UI;
 using UnityEngine;
 using UnityEngine.AI;
@@ -35,12 +37,15 @@ namespace Assets.Code.Player
             _agent.speed = Speed;
             _floatingInfo = GetComponentInChildren<FloatingInfo>();
             _floatingInfo.SetHealthBar(1f);
+
+            StateMachine = new StateMachine<PlayerStateBase>(new PlayerIdleState(this));
         }
 
         void Update()
         {
             Movement();
             MouseMovement();
+            StateMachine.Update();
         }
 
         private void MouseMovement()
@@ -51,7 +56,15 @@ namespace Assets.Code.Player
 
                 if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
                 {
-                    _agent.destination = hit.point;
+                    if (hit.transform.GetComponent<MinionBase>() != null)
+                    {
+                        StateMachine.ChangeState(new PlayerAutoAttackState(this, hit.transform));
+                        _agent.isStopped = true;
+                    } else
+                    {
+                        _agent.isStopped = false;
+                        _agent.destination = hit.point;
+                    }
                 }
             }
         }
