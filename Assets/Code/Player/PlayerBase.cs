@@ -52,16 +52,30 @@ namespace Assets.Code.Player
         {
             if (Input.GetMouseButton(0))
             {
-                RaycastHit hit;
-
-                if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
+                if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out var hit, 100))
                 {
-                    if (hit.transform.GetComponent<MinionBase>() != null)
+                    _agent.destination = hit.point;
+                    StateMachine.ChangeState(new PlayerIdleState(this));
+                    _agent.isStopped = false;
+                }
+            }
+
+            if (Input.GetMouseButtonDown(1))
+            {
+                if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out var hit, 100))
+                {
+                    var target = hit.transform.GetComponent<MinionBase>();
+                    // Traff minion
+                    if (target != null && (AttackTarget == null || target.transform != AttackTarget.transform))
                     {
-                        StateMachine.ChangeState(new PlayerAutoAttackState(this, hit.transform));
+                        Debug.Log($"Traff: {target.CurrentHealth} hp!");
+                        StateMachine.ChangeState(new PlayerAutoAttackState(this, target.transform));
                         _agent.isStopped = true;
-                    } else
+                    }
+                    else // traff IKKE minion
                     {
+                        StateMachine.ChangeState(new PlayerIdleState(this));
+                        AttackTarget = null;
                         _agent.isStopped = false;
                         _agent.destination = hit.point;
                     }
